@@ -1,5 +1,6 @@
 import { Component, Renderer } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { DatePipe } from '@angular/common';
 import * as dateFns from 'date-fns';
  
 @Component({
@@ -7,6 +8,7 @@ import * as dateFns from 'date-fns';
   templateUrl: 'home.html'
 })
 export class HomePage {
+    myDate: Date;
  
     timeOfDay: Date = new Date();
     timeString: string = '12:00';
@@ -20,6 +22,18 @@ export class HomePage {
  
     }
  
+    ngOnInit(): void {
+        
+                this.utcTime();
+            }
+        
+            utcTime(): void {
+                setInterval(() => {         //replaced function() by ()=>
+                    this.myDate = new Date();
+                    console.log(this.myDate); // just testing if it is working
+                  }, 1000);
+            }
+
     ionViewDidLoad(){
  
         this.timeString = dateFns.format(this.timeOfDay, 'h:mm A');
